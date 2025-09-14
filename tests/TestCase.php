@@ -2,7 +2,6 @@
 
 namespace Lukeraymonddowning\Honey\Tests;
 
-use Illuminate\Support\Facades\Crypt;
 use Livewire\LivewireServiceProvider;
 use Lukeraymonddowning\Honey\Providers\HoneyServiceProvider;
 use Orchestra\Testbench\TestCase as OrchestraTestCase;

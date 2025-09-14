@@ -14,7 +14,7 @@ class SpammerFactory extends Factory
         return [
             'ip_address' => $this->faker->ipv4,
             'attempts' => $this->faker->numberBetween(0, 5),
-            'blocked_at' => null
+            'blocked_at' => null,
         ];
     }
 

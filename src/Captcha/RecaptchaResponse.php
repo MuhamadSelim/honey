@@ -1,21 +1,29 @@
 <?php
 
-
 namespace Lukeraymonddowning\Honey\Captcha;
-
 
 use ArrayAccess;
 use Illuminate\Support\Traits\ForwardsCalls;
 use Lukeraymonddowning\Honey\Facades\Honey;
 
 /**
- * @method boolean isSpam()
+ * @method bool isSpam()
  */
 class RecaptchaResponse implements ArrayAccess
 {
     use ForwardsCalls;
 
-    public $success, $score, $action, $challenge_ts, $hostname, $error_codes;
+    public $success;
+
+    public $score;
+
+    public $action;
+
+    public $challenge_ts;
+
+    public $hostname;
+
+    public $error_codes;
 
     public function __construct($data)
     {
@@ -31,7 +39,7 @@ class RecaptchaResponse implements ArrayAccess
 
     public function offsetExists($offset)
     {
-        if ($offset == "error-codes") {
+        if ($offset == 'error-codes') {
             return true;
         }
 
@@ -40,7 +48,7 @@ class RecaptchaResponse implements ArrayAccess
 
     public function offsetGet($offset)
     {
-        if ($offset == "error-codes") {
+        if ($offset == 'error-codes') {
             return $this->error_codes;
         }
 
@@ -49,7 +57,7 @@ class RecaptchaResponse implements ArrayAccess
 
     public function offsetSet($offset, $value)
     {
-        if ($offset == "error-codes") {
+        if ($offset == 'error-codes') {
             return $this->error_codes = $value;
         }
 
@@ -58,7 +66,7 @@ class RecaptchaResponse implements ArrayAccess
 
     public function offsetUnset($offset)
     {
-        if ($offset == "error-codes") {
+        if ($offset == 'error-codes') {
             return $this->error_codes = null;
         }
 

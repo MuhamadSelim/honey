@@ -1,12 +1,10 @@
 <?php
 
-
 namespace Lukeraymonddowning\Honey\Facades;
 
-
 use Illuminate\Support\Facades\Facade;
-use Lukeraymonddowning\Honey\InputNameSelectors\InputNameSelector;
 use Lukeraymonddowning\Honey\Captcha\Recaptcha;
+use Lukeraymonddowning\Honey\InputNameSelectors\InputNameSelector;
 
 /**
  * @method static bool check($data)

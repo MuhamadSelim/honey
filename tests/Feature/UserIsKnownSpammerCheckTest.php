@@ -1,15 +1,12 @@
 <?php
 
-
 namespace Lukeraymonddowning\Honey\Tests\Feature;
-
 
 use Lukeraymonddowning\Honey\Checks\UserIsBlockedSpammerCheck;
 use Lukeraymonddowning\Honey\Models\Spammer;
 
 class UserIsKnownSpammerCheckTest extends TestCase
 {
-
     /** @test */
     public function it_blocks_known_spammers()
     {
@@ -54,5 +51,4 @@ class UserIsKnownSpammerCheckTest extends TestCase
 
         $this->assertTrue($check->passes([]));
     }
-
 }

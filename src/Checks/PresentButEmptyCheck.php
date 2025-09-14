@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Lukeraymonddowning\Honey\Checks;
-
 
 use Lukeraymonddowning\Honey\Facades\Honey;
 
@@ -27,11 +25,11 @@ class PresentButEmptyCheck implements Check
 
     protected function missingFromData()
     {
-        return !$this->data->has(Honey::inputs()->getPresentButEmptyInputName());
+        return ! $this->data->has(Honey::inputs()->getPresentButEmptyInputName());
     }
 
     protected function isFilled()
     {
-        return !empty($this->data[Honey::inputs()->getPresentButEmptyInputName()]);
+        return ! empty($this->data[Honey::inputs()->getPresentButEmptyInputName()]);
     }
 }

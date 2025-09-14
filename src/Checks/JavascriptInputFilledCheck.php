@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Lukeraymonddowning\Honey\Checks;
 
 use Lukeraymonddowning\Honey\Facades\Honey;
@@ -23,12 +22,13 @@ class JavascriptInputFilledCheck implements Check
 
     protected function missingFromData()
     {
-        return !$this->data->offsetExists(Honey::inputs()->getJavascriptInputName());
+        return ! $this->data->offsetExists(Honey::inputs()->getJavascriptInputName());
     }
 
     protected function hasExpectedValue()
     {
         $value = $this->data[Honey::inputs()->getJavascriptInputName()];
-        return rescue(fn() => Values::javascript()->checkValue($value));
+
+        return rescue(fn () => Values::javascript()->checkValue($value));
     }
 }

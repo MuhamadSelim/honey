@@ -6,7 +6,6 @@ use Illuminate\Support\Facades\Schema;
 
 class CreateSpammersTable extends Migration
 {
-
     public function up()
     {
         Schema::create(
@@ -20,10 +19,9 @@ class CreateSpammersTable extends Migration
             }
         );
     }
-    
+
     public function down()
     {
         Schema::dropIfExists(config('honey.spammer_blocking.table_name', 'spammers'));
     }
-
 }

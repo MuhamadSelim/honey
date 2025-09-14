@@ -1,14 +1,12 @@
 <?php
 
-
 namespace Lukeraymonddowning\Honey\Traits;
-
 
 use Lukeraymonddowning\Honey\Facades\Honey;
 use Lukeraymonddowning\Honey\InputValues\Values;
 
 /**
- * @property boolean honeyPassed
+ * @property bool honeyPassed
  */
 trait WithHoney
 {
@@ -23,7 +21,7 @@ trait WithHoney
 
     public function getHoneyPassedProperty()
     {
-        if (!in_array(WithRecaptcha::class, class_uses_recursive(static::class))) {
+        if (! in_array(WithRecaptcha::class, class_uses_recursive(static::class))) {
             return Honey::check($this->honeyInputs);
         }
 

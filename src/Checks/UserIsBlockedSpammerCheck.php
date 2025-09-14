@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Lukeraymonddowning\Honey\Checks;
-
 
 use Illuminate\Support\Facades\Request;
 use Lukeraymonddowning\Honey\Features;
@@ -12,10 +10,10 @@ class UserIsBlockedSpammerCheck implements Check
 {
     public function passes($data)
     {
-        if (!Features::spammerIpTrackingIsEnabled()) {
+        if (! Features::spammerIpTrackingIsEnabled()) {
             return true;
         }
 
-        return !Spammer::isBlocked(Request::ip());
+        return ! Spammer::isBlocked(Request::ip());
     }
 }

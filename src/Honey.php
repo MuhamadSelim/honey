@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Lukeraymonddowning\Honey;
-
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;
@@ -12,11 +10,15 @@ use Lukeraymonddowning\Honey\Models\Spammer;
 class Honey
 {
     protected static Collection $checks;
+
     protected static $failUsing;
+
     protected static $config;
+
     protected $isEnabled = false;
+
     protected $hooks = [
-        'beforeFailing' => []
+        'beforeFailing' => [],
     ];
 
     public function __construct(Collection $checks, callable $failUsing, $config)
@@ -41,7 +43,7 @@ class Honey
     {
         $this->isEnabled = false;
     }
-    
+
     public function enable()
     {
         $this->isEnabled = true;
@@ -49,12 +51,12 @@ class Honey
 
     protected function registerSpammerTracking()
     {
-        $this->beforeFailing(fn(Request $request) => Spammer::markAttempt($request->ip()));
+        $this->beforeFailing(fn (Request $request) => Spammer::markAttempt($request->ip()));
     }
 
     public function check($data)
     {
-        if (!$this->isEnabled()) {
+        if (! $this->isEnabled()) {
             return true;
         }
 
@@ -73,17 +75,18 @@ class Honey
 
     public function fail()
     {
-        if (!$this->isEnabled()) {
+        if (! $this->isEnabled()) {
             return;
         }
 
         $this->runHooks('beforeFailing');
+
         return app()->call(static::$failUsing);
     }
 
     public function runHooks($type)
     {
-        collect($this->hooks[$type])->each(fn($hook) => app()->call($hook));
+        collect($this->hooks[$type])->each(fn ($hook) => app()->call($hook));
     }
 
     public function recaptcha()
@@ -95,5 +98,4 @@ class Honey
     {
         return app(InputNameSelector::class);
     }
-
 }

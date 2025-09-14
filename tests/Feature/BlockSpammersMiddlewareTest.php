@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Lukeraymonddowning\Honey\Tests\Feature;
-
 
 use Lukeraymonddowning\Honey\Http\Middleware\BlockSpammers;
 use Lukeraymonddowning\Honey\Models\Spammer;
@@ -10,7 +8,6 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class BlockSpammersMiddlewareTest extends TestCase
 {
-
     /** @test */
     public function it_blocks_known_spammers()
     {
@@ -43,7 +40,7 @@ class BlockSpammersMiddlewareTest extends TestCase
                 }
             );
         } catch (HttpException $exception) {
-            $this->fail("This should have allowed access");
+            $this->fail('This should have allowed access');
         }
     }
 
@@ -60,8 +57,7 @@ class BlockSpammersMiddlewareTest extends TestCase
                 }
             );
         } catch (HttpException $exception) {
-            $this->fail("This should have allowed access");
+            $this->fail('This should have allowed access');
         }
     }
-
 }

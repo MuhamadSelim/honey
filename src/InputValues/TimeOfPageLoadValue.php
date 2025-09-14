@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Lukeraymonddowning\Honey\InputValues;
-
 
 use Illuminate\Support\Facades\Crypt;
 

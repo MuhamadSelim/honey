@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Lukeraymonddowning\Honey\Views;
 
 use Illuminate\View\Component;

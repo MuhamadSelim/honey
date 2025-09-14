@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Lukeraymonddowning\Honey\Tests;
-
 
 use Illuminate\Support\Facades\Http;
 use Lukeraymonddowning\Honey\Exceptions\RecaptchaFailedException;
@@ -12,14 +10,13 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class CheckRecaptchaTokenMiddlewareTest extends TestCase
 {
-
     /** @test */
     public function it_submits_the_token_to_recaptcha_and_ensures_the_score_meets_the_minimum()
     {
         Http::fake(['*' => ['score' => 0.8]]);
 
         request()->merge(['honey_recaptcha_token' => 'foobar']);
-        (new CheckRecaptchaToken())->handle(
+        (new CheckRecaptchaToken)->handle(
             request(),
             function () {
                 $this->assertEquals(0.8, Honey::recaptcha()->response()['score']);
@@ -34,10 +31,10 @@ class CheckRecaptchaTokenMiddlewareTest extends TestCase
 
         request()->merge(['honey_recapture_token' => 'foobar']);
         try {
-            (new CheckRecaptchaToken())->handle(
+            (new CheckRecaptchaToken)->handle(
                 request(),
                 function () {
-                    $this->fail("The request should have been aborted.");
+                    $this->fail('The request should have been aborted.');
                 }
             );
         } catch (HttpException $exception) {
@@ -51,10 +48,10 @@ class CheckRecaptchaTokenMiddlewareTest extends TestCase
         Http::fake(['*' => ['score' => 0.1]]);
 
         try {
-            (new CheckRecaptchaToken())->handle(
+            (new CheckRecaptchaToken)->handle(
                 request(),
                 function () {
-                    $this->fail("The request should have been aborted.");
+                    $this->fail('The request should have been aborted.');
                 }
             );
         } catch (HttpException $exception) {
@@ -69,22 +66,20 @@ class CheckRecaptchaTokenMiddlewareTest extends TestCase
             [
                 '*' => function () {
                     throw new RecaptchaFailedException(['bad-code']);
-                }
+                },
             ]
         );
 
         request()->merge(['honey_recapture_token' => 'foobar']);
         try {
-            (new CheckRecaptchaToken())->handle(
+            (new CheckRecaptchaToken)->handle(
                 request(),
                 function () {
-                    $this->fail("The request should have been aborted.");
+                    $this->fail('The request should have been aborted.');
                 }
             );
-        } catch
-        (HttpException $exception) {
+        } catch (HttpException $exception) {
             $this->assertEquals(422, $exception->getStatusCode());
         }
     }
-
 }

@@ -27,7 +27,7 @@ class MiddlewareTest extends TestCase
             $this->middleware->handle(
                 static::request(['honey_present' => 'foobar']),
                 function ($request) {
-                    $this->fail("This request should have been aborted");
+                    $this->fail('This request should have been aborted');
                 }
             );
         } catch (HttpException $exception) {
@@ -38,7 +38,7 @@ class MiddlewareTest extends TestCase
             $this->middleware->handle(
                 static::request([], ['honey_present']),
                 function ($request) {
-                    $this->fail("This request should have been aborted");
+                    $this->fail('This request should have been aborted');
                 }
             );
         } catch (HttpException $exception) {
@@ -71,7 +71,7 @@ class MiddlewareTest extends TestCase
             $this->middleware->handle(
                 static::request(['honey_time' => Crypt::encrypt(microtime(true) - 2)]),
                 function ($request) {
-                    $this->fail("This request should have been aborted");
+                    $this->fail('This request should have been aborted');
                 }
             );
         } catch (HttpException $exception) {
@@ -83,13 +83,13 @@ class MiddlewareTest extends TestCase
     /** @test */
     public function the_handler_can_be_configured()
     {
-        Honey::failUsing(fn() => abort(404, "Nothing to see here!"));
+        Honey::failUsing(fn () => abort(404, 'Nothing to see here!'));
 
         try {
             $this->middleware->handle(
                 static::request(['honey_time' => Crypt::encrypt(microtime(true) - 2)]),
                 function ($request) {
-                    $this->fail("This request should have been aborted");
+                    $this->fail('This request should have been aborted');
                 }
             );
         } catch (HttpException $exception) {
@@ -104,5 +104,4 @@ class MiddlewareTest extends TestCase
         config()->set('honey.input_name_selectors.default', 'static');
         $this->middleware = app(PreventSpam::class);
     }
-
 }

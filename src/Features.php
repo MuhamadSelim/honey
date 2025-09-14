@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Lukeraymonddowning\Honey;
-
 
 class Features
 {

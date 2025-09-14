@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Lukeraymonddowning\Honey\InputNameSelectors;
-
 
 class StaticInputNameSelector implements InputNameSelector
 {

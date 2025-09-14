@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Lukeraymonddowning\Honey\Tests;
-
 
 use Lukeraymonddowning\Honey\Features;
 

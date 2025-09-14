@@ -1,17 +1,14 @@
 <?php
 
-
 namespace Lukeraymonddowning\Honey\Tests;
 
-
 use Illuminate\Support\Facades\Http;
+use Lukeraymonddowning\Honey\Captcha\RecaptchaResponse;
 use Lukeraymonddowning\Honey\Exceptions\RecaptchaFailedException;
 use Lukeraymonddowning\Honey\Facades\Honey;
-use Lukeraymonddowning\Honey\Captcha\RecaptchaResponse;
 
 class RecaptchaTokenTest extends TestCase
 {
-
     /** @test */
     public function it_can_return_a_score_based_on_the_given_token()
     {
@@ -21,7 +18,7 @@ class RecaptchaTokenTest extends TestCase
             'action' => 'submit',
             'challenge_ts' => now()->toIso8601String(),
             'hostname' => config('app.url'),
-            'error-codes' => []
+            'error-codes' => [],
         ]]);
 
         $this->assertEquals(0.8, Honey::recaptcha()->checkToken('foobar')['score']);
@@ -37,7 +34,7 @@ class RecaptchaTokenTest extends TestCase
             'action' => 'submit',
             'challenge_ts' => now()->toIso8601String(),
             'hostname' => config('app.url'),
-            'error-codes' => []
+            'error-codes' => [],
         ]]);
 
         $this->assertTrue(Honey::recaptcha()->checkToken('foobar')->isSpam());
@@ -55,8 +52,8 @@ class RecaptchaTokenTest extends TestCase
             'hostname' => config('app.url'),
             'error-codes' => [
                 'missing-input-secret',
-                'bad-request'
-            ]
+                'bad-request',
+            ],
         ]]);
 
         $this->expectException(RecaptchaFailedException::class);
@@ -73,7 +70,7 @@ class RecaptchaTokenTest extends TestCase
             'action' => 'submit',
             'challenge_ts' => now()->toIso8601String(),
             'hostname' => config('app.url'),
-            'error-codes' => []
+            'error-codes' => [],
         ]]);
 
         Honey::recaptcha()->checkToken('foobar');
@@ -83,5 +80,4 @@ class RecaptchaTokenTest extends TestCase
 
         Http::assertSentCount(1);
     }
-
 }

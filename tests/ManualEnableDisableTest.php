@@ -1,17 +1,13 @@
 <?php
 
-
 namespace Lukeraymonddowning\Honey\Tests;
 
-
-use Symfony\Component\HttpKernel\Exception\HttpException;
 use Lukeraymonddowning\Honey\Facades\Honey;
 use Lukeraymonddowning\Honey\Http\Middleware\CheckRecaptchaToken;
-
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 class ManualEnableDisableTest extends TestCase
 {
-
     /** @test */
     public function it_can_be_disabled_and_enabled_manually()
     {
@@ -27,14 +23,14 @@ class ManualEnableDisableTest extends TestCase
     {
         Honey::disable();
 
-        $this->expectExceptionObject(new \Exception("Hello world"));
+        $this->expectExceptionObject(new \Exception('Hello world'));
 
-        $middleware = new CheckRecaptchaToken();
+        $middleware = new CheckRecaptchaToken;
 
         $request = request()->replace([Honey::inputs()->getRecaptchaInputName() => 'foobar']);
 
-        $middleware->handle($request, function() {
-            throw new \Exception("Hello world");
+        $middleware->handle($request, function () {
+            throw new \Exception('Hello world');
         });
     }
 
@@ -46,11 +42,10 @@ class ManualEnableDisableTest extends TestCase
 
         $this->expectExceptionObject(new HTTPException(422, 'You shall not pass!'));
 
-        $middleware = new CheckRecaptchaToken();
+        $middleware = new CheckRecaptchaToken;
 
         $request = request()->replace([Honey::inputs()->getRecaptchaInputName() => 'foobar']);
 
-        $middleware->handle($request, function() {});
+        $middleware->handle($request, function () {});
     }
-
 }

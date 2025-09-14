@@ -1,13 +1,11 @@
 <?php
 
-
 namespace Lukeraymonddowning\Honey\Tests;
-
 
 use Exception;
 use Illuminate\Support\Facades\Http;
-use Lukeraymonddowning\Honey\Facades\Honey;
 use Lukeraymonddowning\Honey\Captcha\RecaptchaResponse;
+use Lukeraymonddowning\Honey\Facades\Honey;
 
 class HooksTest extends TestCase
 {
@@ -20,12 +18,16 @@ class HooksTest extends TestCase
             'action' => 'submit',
             'challenge_ts' => now()->toIso8601String(),
             'hostname' => config('app.url'),
-            'error-codes' => []
+            'error-codes' => [],
         ]]);
 
         $this->expectException(Exception::class);
-        Honey::recaptcha()->afterRequesting(function($response) { $this->assertInstanceOf(RecaptchaResponse::class, $response); });
-        Honey::recaptcha()->afterRequesting(function() { throw new Exception("We should get to here"); });
+        Honey::recaptcha()->afterRequesting(function ($response) {
+            $this->assertInstanceOf(RecaptchaResponse::class, $response);
+        });
+        Honey::recaptcha()->afterRequesting(function () {
+            throw new Exception('We should get to here');
+        });
 
         Honey::recaptcha()->checkToken('foobar');
     }

@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Lukeraymonddowning\Honey\Models;
-
 
 use Illuminate\Database\Eloquent\Model;
 use Lukeraymonddowning\Honey\Tests\Factories\SpammerFactory;
@@ -13,7 +11,7 @@ class Spammer extends Model
 
     public static function factory()
     {
-        return new SpammerFactory();
+        return new SpammerFactory;
     }
 
     public static function isBlocked($ip)
@@ -46,6 +44,7 @@ class Spammer extends Model
     protected function incrementAttempts()
     {
         $this->attempts++;
+
         return $this;
     }
 
@@ -57,5 +56,4 @@ class Spammer extends Model
 
         return $this;
     }
-
 }

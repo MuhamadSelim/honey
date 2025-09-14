@@ -1,16 +1,16 @@
 <?php
 
-
 namespace Lukeraymonddowning\Honey\Captcha;
-
 
 use Illuminate\Support\Facades\Http;
 use Lukeraymonddowning\Honey\Exceptions\RecaptchaFailedException;
 
 class Recaptcha
 {
-    const URL = "https://www.google.com/recaptcha/api/siteverify";
+    const URL = 'https://www.google.com/recaptcha/api/siteverify';
+
     protected RecaptchaResponse $response;
+
     protected $hooks = ['afterRequesting' => []];
 
     public function checkToken($token, $ip = null)
@@ -29,7 +29,7 @@ class Recaptcha
             [
                 'secret' => static::secret(),
                 'response' => $token,
-                'remoteip' => $ip
+                'remoteip' => $ip,
             ]
         );
 

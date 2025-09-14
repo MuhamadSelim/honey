@@ -1,8 +1,6 @@
 <?php
 
-
 namespace Lukeraymonddowning\Honey\Tests\Livewire;
-
 
 use Illuminate\Support\Facades\Crypt;
 use Illuminate\Support\Facades\Http;
@@ -17,7 +15,7 @@ use Lukeraymonddowning\Honey\Traits\WithRecaptcha;
 class HoneyFormTraitTest extends TestCase
 {
     /** @test */
-    public function the_honeyInputs_attribute_is_filled_with_the_input_names()
+    public function the_honey_inputs_attribute_is_filled_with_the_input_names()
     {
         $test = Livewire::test(Example::class);
         $test->assertSet('honeyInputs.honey_present', null);
@@ -54,7 +52,7 @@ class HoneyFormTraitTest extends TestCase
             'action' => 'submit',
             'challenge_ts' => now()->toIso8601String(),
             'hostname' => config('app.url'),
-            'error-codes' => []
+            'error-codes' => [],
         ]]);
 
         $test = Livewire::test(AnotherExample::class);
@@ -65,7 +63,7 @@ class HoneyFormTraitTest extends TestCase
     }
 
     /** @test */
-    public function if_honeyPasses_is_called_and_WithRecaptcha_is_a_trait_it_checks_the_recaptcha_too()
+    public function if_honey_passes_is_called_and_with_recaptcha_is_a_trait_it_checks_the_recaptcha_too()
     {
         Http::fake(['*' => [
             'success' => true,
@@ -73,7 +71,7 @@ class HoneyFormTraitTest extends TestCase
             'action' => 'submit',
             'challenge_ts' => now()->toIso8601String(),
             'hostname' => config('app.url'),
-            'error-codes' => []
+            'error-codes' => [],
         ]]);
 
         $test = Livewire::test(AnotherExample::class);
@@ -86,7 +84,7 @@ class HoneyFormTraitTest extends TestCase
 
         Http::assertSentCount(1);
     }
-    
+
     /** @test */
     public function when_the_recaptcha_token_is_checked_an_event_is_dispatched()
     {
@@ -96,7 +94,7 @@ class HoneyFormTraitTest extends TestCase
             'action' => 'submit',
             'challenge_ts' => now()->toIso8601String(),
             'hostname' => config('app.url'),
-            'error-codes' => []
+            'error-codes' => [],
         ]]);
 
         $test = Livewire::test(AnotherExample::class);
@@ -113,7 +111,7 @@ class HoneyFormTraitTest extends TestCase
             'action' => 'submit',
             'challenge_ts' => now()->toIso8601String(),
             'hostname' => config('app.url'),
-            'error-codes' => []
+            'error-codes' => [],
         ]]);
 
         $test = Livewire::test(AnotherExample::class);
@@ -148,6 +146,7 @@ class AnotherExample extends Component
     use WithHoney, WithRecaptcha;
 
     public $passesEverything = false;
+
     public $passesRecaptcha = false;
 
     public function render()

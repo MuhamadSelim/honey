@@ -1,6 +1,5 @@
 <?php
 
-
 namespace Lukeraymonddowning\Honey\Http\Middleware;
 
 use Illuminate\Http\Request;
@@ -9,7 +8,6 @@ use Lukeraymonddowning\Honey\Facades\Honey;
 
 class BlockSpammers
 {
-
     public function handle(Request $request, callable $next)
     {
         if ($this->userIsAKnownSpammer()) {
@@ -21,7 +19,6 @@ class BlockSpammers
 
     protected function userIsAKnownSpammer()
     {
-        return !app(UserIsBlockedSpammerCheck::class)->passes(request()->input());
+        return ! app(UserIsBlockedSpammerCheck::class)->passes(request()->input());
     }
-
 }

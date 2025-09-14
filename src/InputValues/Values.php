@@ -1,12 +1,9 @@
 <?php
 
-
 namespace Lukeraymonddowning\Honey\InputValues;
-
 
 class Values
 {
-
     public static function javascript()
     {
         return static::resolve('javascript');
@@ -21,5 +18,4 @@ class Values
     {
         return app(config("honey.input_values.$input"));
     }
-
 }
